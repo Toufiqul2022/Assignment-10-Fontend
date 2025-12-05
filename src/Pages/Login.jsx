@@ -26,8 +26,11 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         setUser(user);
-        navigate("/");
-        navigate(location.state);
+        toast.success("Login Successful!", { autoClose: 1500 });
+
+        setTimeout(() => {
+          navigate(location.state || "/");
+        }, 1500);
       })
       .catch((error) => {
         console.log(error);
@@ -40,12 +43,14 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         setUser(user);
-        navigate("/");
-        navigate(location.state);
+        toast.success("Google Login Successful!", { autoClose: 1500 });
+
+        setTimeout(() => {
+          navigate(location.state || "/");
+        }, 1500);
       })
       .catch((error) => {
         console.log(error);
-        toast.error(error.message);
       });
   };
 

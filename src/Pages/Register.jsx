@@ -33,7 +33,7 @@ const Register = () => {
       return toast.warning("Password must contain a lowercase letter");
     }
     if (!number.test(password)) {
-      return toast.warning("Password must contain a lowercase letter");
+      return toast.warning("Password must contain a Number");
     }
 
     registerWithEmailPassword(email, password)
@@ -44,16 +44,17 @@ const Register = () => {
         })
           .then(() => {
             setUser(result.user);
-            navigate("/");
+            toast.success("Account created successfully!");
+            setTimeout(() => {
+              navigate("/");
+            }, 1500);
           })
           .catch((error) => {
             console.log(error);
-            toast.error(error.message);
           });
       })
       .catch((error) => {
         console.log(error);
-        toast.error(error.message);
       });
   };
 
@@ -62,13 +63,14 @@ const Register = () => {
       .then((result) => {
         const user = result.user;
         setUser(user);
-        navigate("/");
+        toast.success("Signed in with Google!");
+        setTimeout(() => {
+          navigate("/");
+        }, 1500);
       })
       .catch((error) => {
         console.log(error);
-        toast.error(error.message);
       });
-    toast.success("Signed in with Google!");
   };
 
   return (
