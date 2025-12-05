@@ -1,17 +1,21 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router";
 import { AuthContext } from "../Provider/AuthProvider";
 import { signOut } from "firebase/auth";
 import { auth } from "../Firebase/Firebase.config";
 import { LuPawPrint } from "react-icons/lu";
 
-
 const Navbar = () => {
   const { user } = useContext(AuthContext);
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
-  const handleSignOut = () => {
-    signOut(auth);
-  };
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => setTheme(theme === "light" ? "dark" : "light");
+  const handleSignOut = () => signOut(auth);
 
   const publicLinks = (
     <>
@@ -66,8 +70,7 @@ const Navbar = () => {
             {user && privateLinks}
           </ul>
         </div>
-
-        <Link to="/" className=" flex items-center gap-3 text-2xl font-bold">
+        <Link to="/" className="flex items-center gap-3 text-2xl font-bold">
           <LuPawPrint /> PawMart
         </Link>
       </div>
@@ -79,36 +82,36 @@ const Navbar = () => {
         </ul>
       </div>
 
-      <div className="navbar-end gap-3">
-        <label className="flex cursor-pointer gap-2">
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="20"
-    height="20"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round">
-    <circle cx="12" cy="12" r="5" />
-    <path
-      d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" />
-  </svg>
-  <input type="checkbox" value="synthwave" className="toggle theme-controller" />
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="20"
-    height="20"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round">
-    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-  </svg>
-</label>
+      <div className="navbar-end gap-3 flex items-center">
+        <label className="flex cursor-pointer gap-2 items-center">
+          <svg
+            width="22"
+            height="22"
+            fill="currentColor"
+            className={`${theme === "light" ? "opacity-100" : "opacity-40"}`}
+          >
+            <circle cx="12" cy="12" r="5" />
+          </svg>
+
+          <input
+            type="checkbox"
+            className="toggle"
+            onChange={toggleTheme}
+            checked={theme === "dark"}
+          />
+
+          <svg
+            width="22"
+            height="22"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            className={`${theme === "dark" ? "opacity-100" : "opacity-40"}`}
+          >
+            <path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z" />
+          </svg>
+        </label>
+
         {user ? (
           <button onClick={handleSignOut} className="btn">
             LogOut
