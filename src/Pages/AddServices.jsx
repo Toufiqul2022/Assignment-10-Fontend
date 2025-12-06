@@ -53,7 +53,7 @@ const AddServices = () => {
 
   return (
     <div className="max-w-xl mx-auto p-6 shadow-lg rounded-xl my-10">
-      <h2 className="text-2xl font-bold mb-5 text-gray-700">
+      <h2 className="text-2xl font-bold mb-5">
         Add Product / Pet
       </h2>
 
