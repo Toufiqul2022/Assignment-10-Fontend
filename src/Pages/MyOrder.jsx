@@ -19,8 +19,8 @@ const MyOrder = () => {
   return (
     <div className="overflow-x-auto p-5">
       <h2 className="text-2xl font-bold mb-5">My Orders</h2>
-      <table className="table table-xs w-full border border-gray-300">
-        <thead className="bg-gray-100">
+      <table className="table table-xs w-full border">
+        <thead>
           <tr>
             <th>#</th>
             <th>Name</th>
