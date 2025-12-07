@@ -17,42 +17,49 @@ const MyOrder = () => {
   }, []);
 
   return (
-    <div className="overflow-x-auto p-5">
-      <h2 className="text-2xl font-bold mb-5">My Orders</h2>
-      <table className="table table-xs w-full border">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Address</th>
-            <th>Date</th>
-            <th>Phone</th>
-          </tr>
-        </thead>
-        <tbody>
-          {myOrder.length === 0 ? (
+    <div className="p-8">
+      <h2 className="text-3xl font-bold mb-6 text-center">My Orders</h2>
+      <div className="overflow-x-auto">
+        <table className="min-w-full border border-gray-300 rounded-lg shadow-md">
+          <thead className="bg-gray-100 text-lg font-semibold">
             <tr>
-              <td colSpan="7" className="text-center p-4">
-                No orders found
-              </td>
+              <th className="py-3 px-4 border-b">#</th>
+              <th className="py-3 px-4 border-b">Buyer Name</th>
+              <th className="py-3 px-4 border-b">Product Name</th>
+              <th className="py-3 px-4 border-b">Price</th>
+              <th className="py-3 px-4 border-b">Quantity</th>
+              <th className="py-3 px-4 border-b">Address</th>
+              <th className="py-3 px-4 border-b">Pickup Date</th>
+              <th className="py-3 px-4 border-b">Phone</th>
             </tr>
-          ) : (
-            myOrder.map((order, index) => (
-              <tr key={order._id} className="hover:bg-gray-50">
-                <th>{index + 1}</th>
-                <td>{order.productName}</td>
-                <td>${order.price}</td>
-                <td>{order.quantity}</td>
-                <td>{order.address}</td>
-                <td>{order.pickupDate}</td>
-                <td>{order.phone}</td>
+          </thead>
+          <tbody>
+            {myOrder.length === 0 ? (
+              <tr>
+                <td colSpan="8" className="text-center py-6 text-gray-500">
+                  No orders found
+                </td>
               </tr>
-            ))
-          )}
-        </tbody>
-      </table>
+            ) : (
+              myOrder.map((order, index) => (
+                <tr
+                  key={order._id}
+                  className="hover:bg-gray-50 transition-colors duration-200"
+                >
+                  <th className="py-3 px-4 border-b">{index + 1}</th>
+                  <td className="py-3 px-4 border-b">{order.buyerName}</td>
+                  <td className="py-3 px-4 border-b">{order.productName}</td>
+                  <td className="py-3 px-4 border-b">${order.price}</td>
+                  <td className="py-3 px-4 border-b">{order.quantity}</td>
+                  <td className="py-3 px-4 border-b">{order.address}</td>
+                  <td className="py-3 px-4 border-b">{order.pickupDate}</td>
+                  <td className="py-3 px-4 border-b">{order.phone}</td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
