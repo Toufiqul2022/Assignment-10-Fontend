@@ -4,8 +4,8 @@ import { Link } from "react-router";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-const MyServices = () => {
-  const [myServices, setMyServices] = useState([]);
+const MyListing = () => {
+  const [MyListing, setMyListing] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const { user } = useContext(AuthContext);
@@ -18,7 +18,7 @@ const MyServices = () => {
     )
       .then((res) => res.json())
       .then((data) => {
-        setMyServices(data);
+        setMyListing(data);
         setLoading(false);
       })
       .catch((error) => {
@@ -42,10 +42,10 @@ const MyServices = () => {
           .delete(`https://assignment-10-backend-dun.vercel.app/delete/${id}`)
           .then((res) => {
             console.log(res);
-            const filterData = myServices.filter(
+            const filterData = MyListing.filter(
               (service) => service._id !== id
             );
-            setMyServices(filterData);
+            setMyListing(filterData);
 
             Swal.fire({
               title: "Deleted!",
@@ -75,12 +75,9 @@ const MyServices = () => {
 
   return (
     <div className="px-5 md:px-10 my-10">
-      <h1 className="text-3xl font-bold text-center mb-8">
-        My Services
-      </h1>
+      <h1 className="text-3xl font-bold text-center mb-8">My Services</h1>
 
-      {/* If No Services */}
-      {myServices.length === 0 && (
+      {MyListing.length === 0 && (
         <div className="text-center text-xl text-gray-500 py-16">
           You have not added any services yet.
         </div>
@@ -98,7 +95,7 @@ const MyServices = () => {
           </thead>
 
           <tbody>
-            {myServices.map((service) => (
+            {MyListing.map((service) => (
               <tr key={service._id} className="hover">
                 <td>
                   <div className="flex items-center gap-3">
@@ -149,4 +146,4 @@ const MyServices = () => {
   );
 };
 
-export default MyServices;
+export default MyListing;

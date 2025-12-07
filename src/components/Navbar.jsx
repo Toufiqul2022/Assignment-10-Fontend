@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link, NavLink } from "react-router";
+import { Link, NavLink } from "react-router-dom"; // ✅ FIXED HERE
 import { AuthContext } from "../Provider/AuthProvider";
 import { signOut } from "firebase/auth";
 import { auth } from "../Firebase/Firebase.config";
@@ -45,6 +45,7 @@ const Navbar = () => {
   return (
     <div className="navbar bg-base-100 shadow-sm px-10">
       <div className="navbar-start">
+        {/* Mobile Menu */}
         <div className="dropdown z-10">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
             <svg
@@ -70,11 +71,13 @@ const Navbar = () => {
             {user && privateLinks}
           </ul>
         </div>
+
         <Link to="/" className="flex items-center gap-3 text-2xl font-bold">
           <LuPawPrint /> PawMart
         </Link>
       </div>
 
+      {/* Desktop Menu */}
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           {publicLinks}
@@ -82,7 +85,9 @@ const Navbar = () => {
         </ul>
       </div>
 
+      {/* Right Section */}
       <div className="navbar-end gap-3 flex items-center">
+        {/* Theme Toggle */}
         <label className="flex cursor-pointer gap-2 items-center">
           <svg
             width="22"
@@ -112,14 +117,35 @@ const Navbar = () => {
           </svg>
         </label>
 
+        {/* User Avatar */}
+        {user && (
+          <Link to="/my-profile" className="btn btn-ghost btn-circle avatar">
+            <div className="w-10 rounded-full border">
+              {user.photoURL ? (
+                <img src={user.photoURL} alt="profile" />
+              ) : (
+                <div className="bg-gray-300 w-full h-full flex items-center justify-center font-bold text-black">
+                  {user?.displayName?.charAt(0) || "U"}
+                </div>
+              )}
+            </div>
+          </Link>
+        )}
+
+        {/* Auth Buttons */}
         {user ? (
           <button onClick={handleSignOut} className="btn">
             LogOut
           </button>
         ) : (
-          <Link to="/login" className="btn">
-            Login
-          </Link>
+          <>
+            <Link to="/login" className="btn">
+              Login
+            </Link>
+            <Link to="/register" className="btn">
+              Register
+            </Link>
+          </>
         )}
       </div>
     </div>

@@ -3,7 +3,7 @@ import { AuthContext } from "../Provider/AuthProvider";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-const AddServices = () => {
+const AddListing = () => {
   const { user } = useContext(AuthContext);
 
   const handleSubmit = (e) => {
@@ -53,9 +53,7 @@ const AddServices = () => {
 
   return (
     <div className="max-w-xl mx-auto p-6 shadow-lg rounded-xl my-10">
-      <h2 className="text-2xl font-bold mb-5">
-        Add Product / Pet
-      </h2>
+      <h2 className="text-2xl font-bold mb-5">Add Product / Pet</h2>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Product / Pet Name */}
@@ -156,4 +154,4 @@ const AddServices = () => {
   );
 };
 
-export default AddServices;
+export default AddListing;

@@ -8,11 +8,12 @@ import PrivateRoute from "./PrivateRoute";
 import ServiceDetails from "../Pages/ServiceDetails";
 import ForgetPassword from "../Pages/ForgetPassword";
 import Error404 from "../components/Error404";
-import AddServices from "../Pages/AddServices";
-import MyServices from "../Pages/MyServices";
+import AddListing from "../Pages/AddListing";
+import MyListing from "../Pages/MyListing";
 import UpdateServices from "../Pages/UpdateServices";
 import MyOrder from "../Pages/MyOrder";
 import CategoryFilteredProducts from "../Pages/CategoryFilteredProducts";
+import MyProfile from "../../../Assignment-9/src/Pages/MyProfile";
 
 export const router = createBrowserRouter([
   {
@@ -49,10 +50,14 @@ export const router = createBrowserRouter([
         Component: ForgetPassword,
       },
       {
+        path: "/my-profile",
+        Component: MyProfile,
+      },
+      {
         path: "/add-services",
         element: (
           <PrivateRoute>
-            <AddServices></AddServices>
+            <AddListing></AddListing>
           </PrivateRoute>
         ),
       },
@@ -60,7 +65,7 @@ export const router = createBrowserRouter([
         path: "/my-services",
         element: (
           <PrivateRoute>
-            <MyServices></MyServices>
+            <MyListing></MyListing>
           </PrivateRoute>
         ),
       },

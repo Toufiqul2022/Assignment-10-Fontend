@@ -113,74 +113,128 @@ const ServiceDetails = () => {
               </h2>
 
               <form onSubmit={handleOrder} className="grid gap-3">
-                <input
-                  type="text"
-                  name="buyerName"
-                  value={user?.displayName || "Unknown User"}
-                  readOnly
-                  className="input input-bordered w-full"
-                />
-                <input
-                  type="email"
-                  name="email"
-                  value={user?.email}
-                  readOnly
-                  className="input input-bordered w-full"
-                />
-                <input
-                  type="text"
-                  name="productId"
-                  value={service._id}
-                  readOnly
-                  className="input input-bordered w-full"
-                />
-                <input
-                  type="text"
-                  name="productName"
-                  value={service.name}
-                  readOnly
-                  className="input input-bordered w-full"
-                />
-                <input
-                  type="number"
-                  name="quantity"
-                  value={service.category === "Pet Care" ? 1 : ""}
-                  readOnly
-                  className="input input-bordered w-full"
-                  placeholder="Quantity"
-                />
-                <input
-                  type="text"
-                  name="price"
-                  value={service.price}
-                  readOnly
-                  className="input input-bordered w-full font-semibold text-green-700"
-                />
-                <input
-                  type="text"
-                  name="address"
-                  required
-                  className="input input-bordered w-full"
-                  placeholder="Address"
-                />
-                <input
-                  type="date"
-                  name="pickupDate"
-                  required
-                  className="input input-bordered w-full"
-                />
-                <input
-                  type="tel"
-                  name="phone"
-                  required
-                  className="input input-bordered w-full"
-                  placeholder="Phone Number"
-                />
-                <textarea
-                  name="notes"
-                  className="textarea textarea-bordered w-full"
-                  placeholder="Additional Notes"
-                ></textarea>
+                <div className="flex flex-col">
+                  <label className="font-semibold text-gray-700">Name</label>
+                  <input
+                    type="text"
+                    name="buyerName"
+                    value={user?.displayName || "Unknown User"}
+                    readOnly
+                    className="input input-bordered w-full"
+                  />
+                </div>
+
+                <div className="flex flex-col">
+                  <label className="font-semibold text-gray-700">Email</label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={user?.email}
+                    readOnly
+                    className="input input-bordered w-full"
+                  />
+                </div>
+
+                <div className="flex flex-col">
+                  <label className="font-semibold text-gray-700">
+                    Product ID
+                  </label>
+                  <input
+                    type="text"
+                    name="productId"
+                    value={service._id}
+                    readOnly
+                    className="input input-bordered w-full"
+                  />
+                </div>
+
+                <div className="flex flex-col">
+                  <label className="font-semibold text-gray-700">
+                    Product Name
+                  </label>
+                  <input
+                    type="text"
+                    name="productName"
+                    value={service.name}
+                    readOnly
+                    className="input input-bordered w-full"
+                  />
+                </div>
+
+                <div className="flex flex-col">
+                  <label className="font-semibold text-gray-700">
+                    Quantity
+                  </label>
+                  <input
+                    type="number"
+                    name="quantity"
+                    placeholder="Quantity"
+                    defaultValue={service.category === "Pets" ? 1 : ""}
+                    readOnly={service.category === "Pets"}
+                    min="1"
+                    className="input input-bordered w-full"
+                  />
+                </div>
+
+                <div className="flex flex-col">
+                  <label className="font-semibold text-gray-700">Price</label>
+                  <input
+                    type="text"
+                    name="price"
+                    value={service.price}
+                    readOnly
+                    className="input input-bordered w-full font-semibold text-green-700"
+                  />
+                </div>
+
+                <div className="flex flex-col">
+                  <label className="font-semibold text-gray-700">Address</label>
+                  <input
+                    type="text"
+                    name="address"
+                    required
+                    className="input input-bordered w-full"
+                    placeholder="Your Address"
+                  />
+                </div>
+
+                <div className="flex flex-col">
+                  <label className="font-semibold text-gray-700">
+                    Pickup Date
+                  </label>
+                  <input
+                    type="date"
+                    name="pickupDate"
+                    required
+                    min={new Date().toISOString().split("T")[0]}
+                    className="input input-bordered w-full"
+                  />
+                </div>
+
+                <div className="flex flex-col">
+                  <label className="font-semibold text-gray-700">
+                    Phone Number
+                  </label>
+                  <input
+                    type="tel"
+                    name="phone"
+                    required
+                    className="input input-bordered w-full"
+                    placeholder="Your Phone Number"
+                  />
+                </div>
+
+                <div className="flex flex-col">
+                  <label className="font-semibold text-gray-700">
+                    Additional Notes
+                  </label>
+                  <textarea
+                    name="notes"
+                    className="textarea textarea-bordered w-full"
+                    placeholder="Any additional notes"
+                  ></textarea>
+                </div>
+
                 <button
                   type="submit"
                   className="btn bg-green-600 text-white w-full mt-2"
